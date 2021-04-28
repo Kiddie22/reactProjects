@@ -2,12 +2,13 @@ import React from "react";
 import Tour from "./Tour";
 
 const Tours = (props) => {
-  const tours = props.tours;
+  var tours = props.tours;
+  const remove = props.remove;
+
   return (
     <>
       {tours.map((tour) => {
-        console.log(tour);
-        return <Tour tour={tour} />;
+        return <Tour key={tour.id} tour={tour} remove={remove} />;
       })}
     </>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const Tour = (props) => {
   const { id, name, info, image, price } = props.tour;
+  const remove = props.remove;
   const [readMore, setReadMore] = useState(false);
   return (
     <div className="single-tour">
@@ -18,7 +19,9 @@ const Tour = (props) => {
             {readMore ? "show less" : "read more"}
           </button>
         </p>
-        <button className="button">Not Interested</button>
+        <button className="button" onClick={() => remove(id)}>
+          Not Interested
+        </button>
       </footer>
     </div>
   );
