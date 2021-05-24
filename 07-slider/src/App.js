@@ -4,7 +4,27 @@ import { FaQuoteRight } from "react-icons/fa";
 import data from "./data";
 
 const App = () => {
-  const [review, setReview] = useState(data[0]);
+  const [index, setIndex] = useState(0);
+  const review = data[index];
+
+  const lastIndex = data.length - 1;
+
+  const nextReview = () => {
+    if (index + 1 > lastIndex) {
+      setIndex(0);
+    } else {
+      setIndex(index + 1);
+    }
+  };
+
+  const prevReview = () => {
+    if (index - 1 < 0) {
+      setIndex(lastIndex);
+    } else {
+      setIndex(index - 1);
+    }
+  };
+
   return (
     <div className="section">
       <div className="title">
@@ -13,13 +33,15 @@ const App = () => {
           Reviews
         </h2>
       </div>
-      <Review review={review} />
+      <Review review={review} nextReview={nextReview} prevReview={prevReview} />
     </div>
   );
 };
 
 const Review = (props) => {
   const { id, image, name, title, quote } = props.review;
+  const nextReview = props.nextReview;
+  const prevReview = props.prevReview;
   return (
     <>
       <div className="section-center">
@@ -32,10 +54,10 @@ const Review = (props) => {
             <FaQuoteRight />
           </div>
           <div className="prev">
-            <FiChevronLeft />
+            <FiChevronLeft onClick={prevReview} />
           </div>
           <div className="next">
-            <FiChevronRight />
+            <FiChevronRight onClick={nextReview} />
           </div>
         </article>
       </div>
